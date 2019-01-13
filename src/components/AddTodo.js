@@ -8,7 +8,11 @@ let AddTodo = ({ dispatch }) => {
         <div>
             <input ref={node => input = node}></input>
                 <button onClick={() => {
-                    dispatch(addTodo(input.value))
+                    if(input.value !== ""){
+                        dispatch(addTodo(input.value))
+                    } else {
+                        alert('Cant add empty text!')
+                    }
                     input.value = ''
                 }}>Add Todo</button>
         </div>
