@@ -4,17 +4,22 @@ import { addTodo } from "../actions"
 
 let AddTodo = ({ dispatch }) => {
     let input
+    const onAddTodoClicked = () => {
+        if(input.value !== ""){
+            dispatch(addTodo(input.value))
+        } else {
+            alert('Cant add empty text!')
+        }
+        input.value = ''
+    }
     return (
         <div>
-            <input ref={node => input = node}></input>
-                <button onClick={() => {
-                    if(input.value !== ""){
-                        dispatch(addTodo(input.value))
-                    } else {
-                        alert('Cant add empty text!')
-                    }
-                    input.value = ''
-                }}>Add Todo</button>
+            <input ref={node => input = node} onKeyPress={(e) => {
+                if(e.key === 'Enter'){
+                    onAddTodoClicked()
+                }
+            }}></input>
+                <button onClick={onAddTodoClicked}>Add Todo</button>
         </div>
     )
 }
